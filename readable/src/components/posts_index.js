@@ -23,13 +23,23 @@ class PostsIndex extends Component {
     })
   }
 
+  renderCategories() {
+    return _.map(this.props.categories, category => {
+      return (
+        <li className="list-group-item" key={category.name}>
+          {category.name}
+        </li>
+      )
+    })
+  }
+
   render() {
     return (
       <div className="container">
         <div className="row">
-          <div className="list-group col-sm-3">
-            test
-          </div>
+          <ul className="list-group col-sm-3">
+            {this.renderCategories()}
+          </ul>
           <ul className='list-group col-sm-9'>
             {this.renderPosts()}
           </ul>
@@ -40,7 +50,7 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts}
+  return { posts: state.posts, categories: state.categories}
 }
 
 export default connect(mapStateToProps, { fetchPosts, fetchCategories })(PostsIndex)
