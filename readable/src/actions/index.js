@@ -16,7 +16,7 @@ axios.defaults.headers.common['Authorization'] = AUTH_HEADERS;
 
 export const FETCH_POSTS = 'FETCH_POST'
 export const FETCH_POST = 'FETCH_POST'
-export const ADD_POST = 'ADD_POST'
+export const CREATE_POST = 'CREATE_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const VOTE_POST = 'VOTE_POST'
@@ -34,26 +34,43 @@ export function fetchPosts() {
   };
 }
 
-export function addPost( { title, body, owner, category }) {
+export function createPost(values) {
+  const { author, title, content, category } = values;
+
   const data = {
-    id: uuidv4(),
-    timestamp: Date.now(),
+    id : uuidv4(),
+    timestamp : Date.now(),
     title,
-    body,
-    owner,
+    body : content,
+    author,
     category
   }
 
   const request = axios.post(`${API}/posts`, data)
 
   return dispatch => {
-    request.then(
+    request.then(({ data }) => {
       dispatch({
-        type: ADD_POST
+        type: CREATE_POST,
+        payload: data
       })
-    )
+    })
   }
 }
+
+export function deletePost(id) {
+  const request = axios.delete(`${API}/posts/${id}`)
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: DELETE_POST,
+        payload: data
+      })
+    })
+  }
+}
+
 
 // Comments
 

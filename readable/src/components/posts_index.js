@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts, fetchCategories, openModal, closeModal } from '../actions';
+import { fetchPosts, fetchCategories, openModal, closeModal, deletePost } from '../actions';
 import { Row } from 'react-bootstrap';
 import { timestampToDate } from '../utils/helpers'
 import ReactModal from 'react-modal';
+import PostsNewForm from './posts_new'
 
 class PostsIndex extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPosts();
     this.props.fetchCategories();
   }
 
   renderPosts() {
-    return _.map(this.props.posts, post => {
+    const posts = _.filter(this.props.posts, post => !post.deleted)
+    return _.map(posts, post => {
+
       return (
         <li className="list-group-item" key={post.id}>
           <Row>{post.title}</Row>
           <Row>Posted by {post.author}</Row>
           <Row>{timestampToDate(post.timestamp)}</Row>
           <Row>{post.body}</Row>
+          <Row><button className="btn btn-danger" onClick={() => this.props.deletePost(post.id)}>Delete Post</button></Row>
         </li>
         );
     })
@@ -38,6 +42,9 @@ class PostsIndex extends Component {
     return (
       <div className="container">
         <div className="row">
+          <button type="button" className="btn btn-primary xs-right" onClick={this.props.openModal}>New Post</button>
+        </div>
+        <div className="row">
           <ul className="list-group col-sm-3">
             {this.renderCategories()}
           </ul>
@@ -50,10 +57,8 @@ class PostsIndex extends Component {
           onRequestClose={this.props.closeModal}
           contentLabel='Modal'
         >
-          Test asda sda dads ada da
-
-          asdaasd
-          asdasdasdasdasd
+        <button type="button" className="close" onClick={this.props.closeModal}>&times;</button>
+          <PostsNewForm />
         </ReactModal>
 
       </div>
@@ -62,7 +67,8 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
+   //const posts = _.filter(state.posts, post => !post.deleted);
   return { posts: state.posts, categories: state.categories, modals:state.modals}
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchCategories, closeModal, openModal })(PostsIndex)
+export default connect(mapStateToProps, { fetchPosts, fetchCategories, closeModal, openModal, deletePost })(PostsIndex)

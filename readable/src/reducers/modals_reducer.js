@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { OPEN_MODAL, CLOSE_MODAL } from '../actions';
 
 const initialState = {
-  modalOpen: true
+  modalOpen: false
 }
 
 export default function (state = initialState, action) {
