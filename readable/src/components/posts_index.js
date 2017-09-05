@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts, fetchCategories } from '../actions';
+import { fetchPosts, fetchCategories, openModal, closeModal } from '../actions';
 import { Row } from 'react-bootstrap';
 import { timestampToDate } from '../utils/helpers'
+import ReactModal from 'react-modal';
 
 class PostsIndex extends Component {
   componentDidMount() {
@@ -44,13 +45,24 @@ class PostsIndex extends Component {
             {this.renderPosts()}
           </ul>
         </div>
+        <ReactModal
+          isOpen={this.props.modals.modalOpen}
+          onRequestClose={this.props.closeModal}
+          contentLabel='Modal'
+        >
+          Test asda sda dads ada da
+
+          asdaasd
+          asdasdasdasdasd
+        </ReactModal>
+
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts, categories: state.categories}
+  return { posts: state.posts, categories: state.categories, modals:state.modals}
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchCategories })(PostsIndex)
+export default connect(mapStateToProps, { fetchPosts, fetchCategories, closeModal, openModal })(PostsIndex)
