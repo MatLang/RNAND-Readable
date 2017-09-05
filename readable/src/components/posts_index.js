@@ -12,7 +12,11 @@ class PostsIndex extends Component {
     this.props.fetchCategories();
   }
 
-  renderPosts() {
+  onDeleteClick(id) {
+    this.props.deletePost(id)
+  }
+
+    renderPosts() {
     const posts = _.filter(this.props.posts, post => !post.deleted)
     return _.map(posts, post => {
 
@@ -22,7 +26,7 @@ class PostsIndex extends Component {
           <Row>Posted by {post.author}</Row>
           <Row>{timestampToDate(post.timestamp)}</Row>
           <Row>{post.body}</Row>
-          <Row><button className="btn btn-danger" onClick={() => this.props.deletePost(post.id)}>Delete Post</button></Row>
+          <Row><button className="btn btn-danger" onClick={() =>this.onDeleteClick(post.id)}>Delete Post</button></Row>
         </li>
         );
     })

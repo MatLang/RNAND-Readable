@@ -52,7 +52,7 @@ export function createPost(values) {
     request.then(({ data }) => {
       dispatch({
         type: CREATE_POST,
-        payload: data
+        data
       })
     })
   }
@@ -62,10 +62,10 @@ export function deletePost(id) {
   const request = axios.delete(`${API}/posts/${id}`)
 
   return dispatch => {
-    request.then(({ data }) => {
+    request.then((result) => {
       dispatch({
         type: DELETE_POST,
-        payload: data
+        id
       })
     })
   }
