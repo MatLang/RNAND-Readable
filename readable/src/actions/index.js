@@ -34,6 +34,19 @@ export function fetchPosts() {
   };
 }
 
+export function fetchPost(id) {
+  const request = axios.get(`${API}/posts/${id}`)
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type:FETCH_POST,
+        data
+      })
+    })
+  }
+}
+
 export function createPost(values) {
   const { author, title, content, category } = values;
 
@@ -71,6 +84,18 @@ export function deletePost(id) {
   }
 }
 
+export function votePost(id, option) {
+  const request = axios.post(`${API}/posts/${id}`, {option})
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: VOTE_POST,
+        post: data
+      })
+    })
+  }
+}
 
 // Comments
 

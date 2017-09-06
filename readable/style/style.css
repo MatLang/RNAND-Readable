@@ -1,3 +1,5 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 .overlay {
   position: fixed;
   top: 0px;
@@ -22,4 +24,28 @@
   border-radius: 3px;
   box-shadow: 0 3px 8px 0 rgba(0,0,0,.24), 0 3px 12px 0 rgba(0,0,0,.12);
   min-width: 500px;
+}
+
+.btn {
+  margin: 5px 0 5px 0;
+}
+
+.label {
+  margin: 10px 5px 10px 0px;
+}
+
+.row .glyphicon {
+  margin: 5px;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.list-group-item {
+  padding: 20px !important;
+}
+
+.post-body {
+  padding: 10px 0px 10px 0px !important;
 }

@@ -11,6 +11,8 @@ import {
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/root_reducer';
 import PostsIndex from './components/posts_index';
+import PostsShow from './components/posts_show';
+
 
 const store = createStore(
   rootReducer,
@@ -23,9 +25,10 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Switch>
-        <Route exact path="/" component={PostsIndex} />
-      </Switch>
+        <Switch>
+          <Route exact path="/" component={PostsIndex} />
+          <Route path="/posts/:id" component={PostsShow} />
+        </Switch>
     </Router>
   </Provider>,
    document.querySelector('.container'));
