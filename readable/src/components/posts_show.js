@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost } from '../actions';
+import { getPost } from '../actions';
 
 class PostsShow extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
       const { id } = this.props.match.params;
-      this.props.fetchPost(id);
+      this.props.getPost(id);
   }
 
   render() {
     const { post } = this.props;
 
-
-
     return (!post)
-      ? <div> Loading...</div>
+      ? <div>Loading</div>
       :
         <div>
           {post.title}
@@ -24,9 +22,7 @@ class PostsShow extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    return { post: state.posts[ownProps.match.params.id], posts: state.posts }
+    return { post: state.posts[ownProps.match.params.id]}
 }
 
-export default connect(mapStateToProps, {
-    fetchPost
-})(PostsShow);
+export default connect(mapStateToProps, { getPost })(PostsShow)

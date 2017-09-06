@@ -15,7 +15,7 @@ axios.defaults.headers.common['Authorization'] = AUTH_HEADERS;
 // Posts
 
 export const FETCH_POSTS = 'FETCH_POST'
-export const FETCH_POST = 'FETCH_POST'
+export const GET_POST = 'GET_POST'
 export const CREATE_POST = 'CREATE_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const EDIT_POST = 'EDIT_POST'
@@ -34,20 +34,18 @@ export function fetchPosts() {
   };
 }
 
-export function fetchPost(id) {
+export function getPost(id) {
 
   const request = axios.get(`${API}/posts/${id}`)
 
   return dispatch => {
-    request.then(({ data }) => {
+    request.then(({data}) => {
       dispatch({
-        type: FETCH_POST,
+        type: GET_POST,
         data
       })
     })
   }
-
-
 }
 
 export function createPost(values) {
