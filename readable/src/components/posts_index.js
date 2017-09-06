@@ -5,6 +5,7 @@ import { Row, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label
 import { timestampToDate } from '../utils/helpers'
 import ReactModal from 'react-modal';
 import PostsNewForm from './posts_new'
+import { Link } from 'react-router-dom';
 
 class PostsIndex extends Component {
   componentWillMount() {
@@ -35,7 +36,11 @@ class PostsIndex extends Component {
 
       return (
         <li className="list-group-item" key={post.id}>
-          <Row className="text text-primary "><h4>{post.title}</h4></Row>
+          <Row className="text text-primary ">
+            <Link to={`/posts/${post.id}`}>
+              {post.title}
+            </Link>
+          </Row>
           <Row className="text-muted">
             Posted by {post.author}
             <Glyphicon glyph="glyphicon glyphicon glyphicon-time" />

@@ -25,10 +25,12 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
+      <div>
         <Switch>
           <Route exact path="/" component={PostsIndex} />
           <Route exact path="/posts/:id" component={PostsShow} />
         </Switch>
+      </div>
     </Router>
   </Provider>,
    document.querySelector('.container'));

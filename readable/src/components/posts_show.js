@@ -14,14 +14,14 @@ class PostsShow extends Component {
 
     return (
       <div>
-        { post.title }
+
       </div>
     )
   }
 }
 
 function mapStateToProps(state, ownProps) {
-    return { post: state.posts[ownProps.match.params.id] }
+  return { posts: state.posts};
 }
 
 export default connect(mapStateToProps, {

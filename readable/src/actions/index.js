@@ -40,7 +40,7 @@ export function fetchPost(id) {
   return dispatch => {
     request.then(({data}) => {
       dispatch({
-        type:FETCH_POST,
+        type: FETCH_POST,
         payload: data
       })
     })
