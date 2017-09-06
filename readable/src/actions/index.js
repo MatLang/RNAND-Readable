@@ -38,10 +38,10 @@ export function fetchPost(id) {
   const request = axios.get(`${API}/posts/${id}`)
 
   return dispatch => {
-    request.then(({ data }) => {
+    request.then(({data}) => {
       dispatch({
         type:FETCH_POST,
-        data
+        payload: data
       })
     })
   }

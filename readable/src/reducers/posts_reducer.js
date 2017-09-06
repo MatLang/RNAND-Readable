@@ -8,8 +8,10 @@ export default function(state=initialPostsState, action) {
     case FETCH_POSTS:
       return _.mapKeys(action.posts, 'id');
     case FETCH_POST:
-      return {...state,
-        [action.data.id]: action.data}
+        return {
+            ...state,
+            [action.payload.id]: action.payload
+        }
     case DELETE_POST:
       return {...state,
       [action.id]: {...state[action.id],
