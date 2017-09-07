@@ -15,6 +15,7 @@ axios.defaults.headers.common['Authorization'] = AUTH_HEADERS;
 // Posts
 
 export const FETCH_POSTS = 'FETCH_POST'
+export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POSTS'
 export const GET_POST = 'GET_POST'
 export const CREATE_POST = 'CREATE_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -32,6 +33,19 @@ export function fetchPosts() {
       })
     })
   };
+}
+
+export function fetchCategoryPosts(category){
+  const request = axios.get(`${API}/${category}/posts`)
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: FETCH_CATEGORY_POSTS,
+        posts: data
+      })
+    })
+  }
 }
 
 export function getPost(id) {

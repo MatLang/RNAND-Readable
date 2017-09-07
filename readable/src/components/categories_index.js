@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../actions';
+import { Link } from 'react-router-dom';
 
 class CategoriesIndex extends Component {
   componentDidMount(){
@@ -11,7 +12,7 @@ class CategoriesIndex extends Component {
     return _.map(this.props.categories, category => {
       return (
         <li className="list-group-item" key={category.name}>
-          {category.name}
+          <Link to={`/${category.name}`}>{category.name}</Link>
         </li>
       )
     })

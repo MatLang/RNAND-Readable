@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_POSTS, DELETE_POST, CREATE_POST, VOTE_POST, GET_POST } from '../actions';
+import { FETCH_POSTS, DELETE_POST, CREATE_POST, VOTE_POST, GET_POST, FETCH_CATEGORY_POSTS } from '../actions';
 
 const initialPostsState = {}
 
@@ -9,6 +9,8 @@ export default function(state=initialPostsState, action) {
       return { ...state,
          [action.data.id]: {...action.data} };
     case FETCH_POSTS:
+      return _.mapKeys(action.posts, 'id');
+    case FETCH_CATEGORY_POSTS:
       return _.mapKeys(action.posts, 'id');
     case DELETE_POST:
       return {...state,
