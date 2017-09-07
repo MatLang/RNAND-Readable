@@ -13,6 +13,7 @@ import rootReducer from './reducers/root_reducer';
 import PostsIndex from './components/posts_index';
 import PostsShow from './components/posts_show';
 import CommentsShow from './components/comments_show';
+import PostsEdit from './components/posts_edit';
 
 
 const store = createStore(
@@ -30,6 +31,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/posts/:id/comments" component={CommentsShow} />
           <Route path="/posts/:id" component={PostsShow} />
+          <Route path="/edit/:id" component={PostsEdit} />
           <Route path="/" component={PostsIndex} />
         </Switch>
       </div>

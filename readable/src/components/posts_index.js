@@ -41,6 +41,7 @@ class PostsIndex extends Component {
             <Link to={`/posts/${post.id}`}>
               {post.title}
             </Link>
+            <Link to={`/edit/${post.id}`}><Glyphicon glyph="glyphicon glyphicon-edit"/></Link>
           </Row>
           <Row className="text-muted">
             Posted by {post.author}

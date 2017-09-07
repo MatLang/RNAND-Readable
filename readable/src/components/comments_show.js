@@ -29,7 +29,6 @@ class CommentsShow extends Component {
                 header={post.title}
                 key={id}
             >
-                <div>{post.id}</div>
                 <div>{timestampToDate(post.timestamp)} by {post.author}</div>
                 <div>{post.body}</div>
                 <div>{post.category}</div>
