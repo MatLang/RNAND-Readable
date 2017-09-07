@@ -27,7 +27,7 @@ class CategoriesDetails extends Component {
 
     const { posts } = this.props;
 
-    if (posts.length === 0) {
+    if (!posts) {
       return <div> No posts found for this category!</div>
     }
 
@@ -77,6 +77,7 @@ class CategoriesDetails extends Component {
     return (
       <div className="container">
         <div className="row">
+          <Link to="/"><Button bsStyle="primary" >Home</Button></Link>
           <Button className="pull-right" bsSize="small" bsStyle="primary" onClick={this.props.openModal}><Glyphicon glyph="glyphicon glyphicon-plus" /></Button>
         </div>
         <div className="row">

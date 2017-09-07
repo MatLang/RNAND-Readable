@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCategories } from '../actions';
+import { fetchCategories, fetchCategoryPosts } from '../actions';
 import { Link } from 'react-router-dom';
 
 class CategoriesIndex extends Component {
@@ -9,10 +9,16 @@ class CategoriesIndex extends Component {
   }
 
   renderCategories() {
+    const { fetchCategoryPosts } = this.props;
     return _.map(this.props.categories, category => {
       return (
         <li className="list-group-item" key={category.name}>
-          <Link to={`/${category.name}`}>{category.name}</Link>
+          <Link
+            to={`/${category.path}`}
+            onClick={() => fetchCategoryPosts(category.path)}
+          >
+            {category.name}
+          </Link>
         </li>
       )
     })
@@ -31,4 +37,4 @@ function mapStateToProps(state) {
   return {categories: state.categories}
 }
 
-export default connect(mapStateToProps, { fetchCategories })(CategoriesIndex)
+export default connect(mapStateToProps, { fetchCategories, fetchCategoryPosts })(CategoriesIndex)
