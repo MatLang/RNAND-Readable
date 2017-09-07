@@ -10,7 +10,6 @@ import CategoriesIndex from './categories_index';
 
 class PostsIndex extends Component {
   componentDidMount() {
-    this.props.fetchCategories();
     if(this.props.match.params.category) {
       const {
         fetchCategoryPosts,
@@ -106,7 +105,6 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-   //const posts = _.filter(state.posts, post => !post.deleted);
   return { posts: _.filter(state.posts, post => !post.deleted), categories: state.categories, modals:state.modals}
 }
 

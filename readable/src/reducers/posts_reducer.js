@@ -9,7 +9,8 @@ export default function(state=initialPostsState, action) {
       return { ...state,
          [action.data.id]: {...action.data} };
     case FETCH_POSTS:
-      return _.mapKeys(action.posts, 'id');
+      return {...state,
+        ..._.mapKeys(action.posts, 'id')};
     case FETCH_CATEGORY_POSTS:
       return _.mapKeys(action.posts, 'id');
     case DELETE_POST:

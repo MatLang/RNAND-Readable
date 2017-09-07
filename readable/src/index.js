@@ -32,7 +32,7 @@ ReactDOM.render(
           <Route path="/posts/:id" component={PostsShow} />
           <Route path="/edit/:id" component={PostsEdit} />
           <Route path="/:category" component={PostsIndex} />
-          <Route path="/" component={PostsIndex} />
+          <Route exact path="/" component={PostsIndex} />
         </Switch>
       </div>
     </Router>
