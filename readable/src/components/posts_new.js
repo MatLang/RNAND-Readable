@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { fetchCategories, createPost, closeModal, fetchPosts } from '../actions';
-
 import {
     FormGroup,
     FormControl,
@@ -96,8 +95,8 @@ class PostsNew extends Component {
         <Field name="category" label="Category:" component={this.renderCategoryFields.bind(this)} />
         <Field name="content" type="textarea" component={this.renderField} label="Content" />
         <div>
-          <button type="submit" disabled={submitting}>Submit</button>
-          <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+          <button className="btn-primary" type="submit" disabled={submitting}>Submit</button>
+          <button className="btn-danger" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
         </div>
       </form>
     )

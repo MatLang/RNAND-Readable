@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPost } from '../actions';
+import { getPost, votePost } from '../actions';
+import { Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label, Well } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { timestampToDate } from '../utils/helpers'
 
 class PostsShow extends Component {
 
   componentDidMount() {
       const { id } = this.props.match.params;
       this.props.getPost(id);
+  }
+
+  onVotePost(id, option) {
+    this.props.votePost(id,option);
   }
 
   render() {
@@ -16,7 +23,44 @@ class PostsShow extends Component {
       ? <div>Loading</div>
       :
         <div>
-          {post.title}
+          <Row>
+            <Col>
+              <Link to="/"><Button bsStyle="primary" >Home</Button></Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <li className="list-group-item" key={post.id}>
+                <Row className="text text-primary ">
+                    {post.title}
+                </Row>
+                <Row className="text-muted">
+                  Posted by {post.author}
+                  <Glyphicon glyph="glyphicon glyphicon glyphicon-time" />
+                  {timestampToDate(post.timestamp)}
+                </Row>
+                <Row><Label>{post.category}</Label></Row>
+                <Row className="post-body">{post.body}</Row>
+                <Row >
+                  <h7>
+                    <Label className="pull-right" bsSize="small" bsStyle={post.voteScore < 0 ? "danger": "success"}>{post.voteScore}
+                    </Label>
+                  </h7>
+                </Row>
+                <Row>
+                  <ButtonToolbar className="pull-right">
+                    <ButtonGroup>
+                      <Button bsSize="small" bsStyle="success" onClick={() => this.onVotePost(post.id,'upVote')}><Glyphicon  glyph="glyphicon glyphicon-thumbs-up" /></Button>
+                      <Button bsSize="small" bsStyle="primary" onClick={() => this.onVotePost(post.id,'downVote')}><Glyphicon glyph="glyphicon glyphicon-thumbs-down" /></Button>
+                      <Button bsSize="small" bsStyle="danger" onClick={() =>this.onDeleteClick(post.id)}>
+                        <Glyphicon glyph="glyphicon glyphicon-remove" />
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonToolbar>
+                </Row>
+              </li>
+            </Col>
+          </Row>
         </div>
   }
 }
@@ -25,4 +69,4 @@ function mapStateToProps(state, ownProps) {
     return { post: state.posts[ownProps.match.params.id]}
 }
 
-export default connect(mapStateToProps, { getPost })(PostsShow)
+export default connect(mapStateToProps, { getPost, votePost })(PostsShow)

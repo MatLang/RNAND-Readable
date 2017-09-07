@@ -71,23 +71,10 @@ class PostsIndex extends Component {
     })
   }
 
-
-
-  renderCategories() {
-    return _.map(this.props.categories, category => {
-      return (
-        <li className="list-group-item" key={category.name}>
-          {category.name}
-        </li>
-      )
-    })
-  }
-
   render() {
     return (
       <div className="container">
         <div className="row">
-
           <Button className="pull-right" bsSize="small" bsStyle="primary" onClick={this.props.openModal}><Glyphicon glyph="glyphicon glyphicon-plus" /></Button>
         </div>
         <div className="row">

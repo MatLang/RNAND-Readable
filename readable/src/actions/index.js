@@ -100,10 +100,23 @@ export function votePost(id, option) {
 
 // Comments
 
-export const GET_COMMENTS_FOR_POST = 'GET_COMMENTS_FOR_POST'
+export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
+
+export function fetchPostComments(id){
+  const request = axios.get(`${API}/posts/${id}/comments`)
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: FETCH_POST_COMMENTS,
+        comments: data
+      })
+    })
+  }
+}
 
 // Categories
 

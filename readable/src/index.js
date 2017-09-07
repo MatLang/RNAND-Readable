@@ -12,6 +12,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/root_reducer';
 import PostsIndex from './components/posts_index';
 import PostsShow from './components/posts_show';
+import CommentsShow from './components/comments_show';
 
 
 const store = createStore(
@@ -27,6 +28,7 @@ ReactDOM.render(
     <Router>
       <div>
         <Switch>
+          <Route path="/posts/:id/comments" component={CommentsShow} />
           <Route path="/posts/:id" component={PostsShow} />
           <Route path="/" component={PostsIndex} />
         </Switch>
