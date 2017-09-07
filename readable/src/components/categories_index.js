@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCategories, fetchCategoryPosts } from '../actions';
+import { fetchCategories, fetchCategoryPosts, fetchPosts } from '../actions';
 import { Link } from 'react-router-dom';
 
 class CategoriesIndex extends Component {
@@ -27,6 +27,14 @@ class CategoriesIndex extends Component {
   render() {
     return (
       <ul className="col-sm-3">
+        <li className="list-group-item" key="all">
+          <Link
+            to="/"
+            onClick={() => this.fetchPosts()}
+          >
+            all
+          </Link>
+        </li>
         {this.renderCategories()}
       </ul>
     );
@@ -37,4 +45,4 @@ function mapStateToProps(state) {
   return {categories: state.categories}
 }
 
-export default connect(mapStateToProps, { fetchCategories, fetchCategoryPosts })(CategoriesIndex)
+export default connect(mapStateToProps, { fetchCategories, fetchCategoryPosts, fetchPosts })(CategoriesIndex)

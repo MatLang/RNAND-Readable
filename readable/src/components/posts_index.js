@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts, fetchCategories, openModal, closeModal, deletePost, votePost } from '../actions';
+import { fetchPosts, fetchCategories, fetchCategoryPosts, openModal, closeModal, deletePost, votePost } from '../actions';
 import { Row, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label, Well } from 'react-bootstrap';
 import { timestampToDate } from '../utils/helpers'
 import ReactModal from 'react-modal';
@@ -9,9 +9,16 @@ import { Link } from 'react-router-dom';
 import CategoriesIndex from './categories_index';
 
 class PostsIndex extends Component {
-  componentWillMount() {
-    this.props.fetchPosts();
+  componentDidMount() {
     this.props.fetchCategories();
+    if(this.props.match.params.category) {
+      const {
+        fetchCategoryPosts,
+        match: { params : { category } } } = this.props;
+      fetchCategoryPosts(category);
+    } else {
+      this.props.fetchPosts();
+    }
   }
 
   onDeleteClick(id) {
@@ -103,4 +110,4 @@ function mapStateToProps(state) {
   return { posts: _.filter(state.posts, post => !post.deleted), categories: state.categories, modals:state.modals}
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchCategories, closeModal, openModal, deletePost, votePost })(PostsIndex)
+export default connect(mapStateToProps, { fetchPosts, fetchCategoryPosts, fetchCategories, closeModal, openModal, deletePost, votePost })(PostsIndex)

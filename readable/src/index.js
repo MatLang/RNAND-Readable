@@ -14,8 +14,6 @@ import PostsIndex from './components/posts_index';
 import PostsShow from './components/posts_show';
 import CommentsShow from './components/comments_show';
 import PostsEdit from './components/posts_edit';
-import CategoriesDetails from './components/category_show';
-
 
 const store = createStore(
   rootReducer,
@@ -33,7 +31,7 @@ ReactDOM.render(
           <Route path="/posts/:id/comments" component={CommentsShow} />
           <Route path="/posts/:id" component={PostsShow} />
           <Route path="/edit/:id" component={PostsEdit} />
-          <Route path="/:category" component={CategoriesDetails} />
+          <Route path="/:category" component={PostsIndex} />
           <Route path="/" component={PostsIndex} />
         </Switch>
       </div>
