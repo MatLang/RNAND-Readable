@@ -30,7 +30,7 @@ class CategoriesIndex extends Component {
         <li className="list-group-item" key="all">
           <Link
             to="/"
-            onClick={() => this.fetchPosts()}
+            onClick={() => this.props.fetchPosts()}
           >
             all
           </Link>
