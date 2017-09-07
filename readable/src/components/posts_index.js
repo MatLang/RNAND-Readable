@@ -6,6 +6,7 @@ import { timestampToDate } from '../utils/helpers'
 import ReactModal from 'react-modal';
 import PostsNewForm from './posts_new'
 import { Link } from 'react-router-dom';
+import CategoriesIndex from './categories_index';
 
 class PostsIndex extends Component {
   componentWillMount() {
@@ -90,9 +91,7 @@ class PostsIndex extends Component {
           <Button className="pull-right" bsSize="small" bsStyle="primary" onClick={this.props.openModal}><Glyphicon glyph="glyphicon glyphicon-plus" /></Button>
         </div>
         <div className="row">
-          <ul className="col-sm-3">
-            {this.renderCategories()}
-          </ul>
+          <CategoriesIndex />
           <ul className='list-group col-sm-9'>
             {this.renderPosts()}
           </ul>
