@@ -112,6 +112,26 @@ export function votePost(id, option) {
   }
 }
 
+export function editPost(id,values) {
+  const { title, body } = values;
+
+  const data = {
+    title,
+    body
+  }
+  const request = axios.put(`${API}/posts/${id}`, data)
+
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: EDIT_POST,
+        payload: data
+      })
+    })
+  }
+}
+
 // Comments
 
 export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'

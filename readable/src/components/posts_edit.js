@@ -8,7 +8,7 @@ import {
     Button,
     ControlLabel
 } from 'react-bootstrap';
-import { getPost } from '../actions';
+import { getPost, editPost } from '../actions';
 
 class PostsEdit extends Component {
   componentDidMount(){
@@ -45,18 +45,23 @@ class PostsEdit extends Component {
     );
 }
 
+onSubmit(values){
+  const { id } = this.props.match.params;
+  this.props.editPost(id,values);
+}
+
 
 render () {
   const { handleSubmit, pristine, reset, submitting, categories, post } = this.props
   return (
     <ul className='list-group col-sm-9'>
-      <form /*onSubmit={ handleSubmit(this.onSubmit.bind(this))}*/>
+      <form onSubmit={ handleSubmit(this.onSubmit.bind(this))}>
         <Field name="title" type="text" component={this.renderField} label="Title"/>
         <FormGroup>
           <ControlLabel>Author</ControlLabel>
           <FormControl.Static>{post ? post.author : ''}</FormControl.Static>
         </FormGroup>
-        <Field name="body" type="textarea" component={this.renderField} label="Content" />
+        <Field name="body" type="textarea" component={this.renderField} label="Body" />
         <div>
           <button className="btn-primary" type="submit" disabled={submitting}>Submit</button>
           <Link to="/"><Button bsSize="small" bsStyle="danger" >Cancel</Button></Link>
@@ -75,5 +80,5 @@ export default reduxForm({
     //validate,
     form: 'EditPostForm'
 })(
-    connect(mapStateToProps, { getPost })(PostsEdit)
+    connect(mapStateToProps, { getPost, editPost })(PostsEdit)
 );
