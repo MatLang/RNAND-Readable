@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Link,
   Switch
@@ -14,6 +14,7 @@ import PostsIndex from './components/posts_index';
 import PostsShow from './components/posts_show';
 import CommentsShow from './components/comments_show';
 import PostsEdit from './components/posts_edit';
+import { Grid } from 'react-bootstrap';
 
 const store = createStore(
   rootReducer,
@@ -25,16 +26,18 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <BrowserRouter>
       <div>
-        <Switch>
-          <Route path="/posts/:id/comments" component={CommentsShow} />
-          <Route path="/posts/:id" component={PostsShow} />
-          <Route path="/edit/:id" component={PostsEdit} />
-          <Route path="/:category" component={PostsIndex} />
-          <Route exact path="/" component={PostsIndex} />
-        </Switch>
+        <Grid>
+          <Switch>
+            <Route path="/posts/:id/comments" component={CommentsShow} />
+            <Route path="/posts/:id" component={PostsShow} />
+            <Route path="/edit/:id" component={PostsEdit} />
+            <Route path="/:category" component={PostsIndex} />
+            <Route exact path="/" component={PostsIndex} />
+          </Switch>
+        </Grid>
       </div>
-    </Router>
+    </BrowserRouter>
   </Provider>,
    document.querySelector('.container'));

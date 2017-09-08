@@ -112,7 +112,7 @@ export function votePost(id, option) {
   }
 }
 
-export function editPost(id,values) {
+export function editPost(id,values, callback) {
   const { title, body } = values;
 
   const data = {
@@ -128,7 +128,7 @@ export function editPost(id,values) {
         type: EDIT_POST,
         payload: data
       })
-    })
+    }).then(() => callback())
   }
 }
 

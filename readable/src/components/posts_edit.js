@@ -47,7 +47,9 @@ class PostsEdit extends Component {
 
 onSubmit(values){
   const { id } = this.props.match.params;
-  this.props.editPost(id,values);
+  this.props.editPost(id,values, () => {
+            this.props.history.push(`/`);
+        });
 }
 
 

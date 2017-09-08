@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts, fetchCategories, fetchCategoryPosts, openModal, closeModal, deletePost, votePost } from '../actions';
-import { Row, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label, Well } from 'react-bootstrap';
+import { Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label, Well } from 'react-bootstrap';
 import { timestampToDate } from '../utils/helpers'
 import ReactModal from 'react-modal';
 import PostsNewForm from './posts_new'
@@ -57,21 +57,27 @@ class PostsIndex extends Component {
           <Row><Label>{post.category}</Label></Row>
           <Row className="post-body">{post.body}</Row>
           <Row >
-            <h7>
-              <Label className="pull-right" bsSize="small" bsStyle={post.voteScore < 0 ? "danger": "success"}>{post.voteScore}
-              </Label>
-            </h7>
+            <Col xs={12} className="text-xs-right">
+              <h7>
+                <Label
+                  className="text-xs-right"
+                  bsSize="small"
+                  bsStyle={post.voteScore < 0 ? "danger": "success"}>
+                    {post.voteScore}
+                </Label>
+              </h7>
+            </Col>
           </Row>
           <Row>
-            <ButtonToolbar className="pull-right">
-              <ButtonGroup>
-                <Button bsSize="small" bsStyle="success" onClick={() => this.onVotePost(post.id,'upVote')}><Glyphicon  glyph="glyphicon glyphicon-thumbs-up" /></Button>
-                <Button bsSize="small" bsStyle="primary" onClick={() => this.onVotePost(post.id,'downVote')}><Glyphicon glyph="glyphicon glyphicon-thumbs-down" /></Button>
-                <Button bsSize="small" bsStyle="danger" onClick={() =>this.onDeleteClick(post.id)}>
-                  <Glyphicon glyph="glyphicon glyphicon-remove" />
-                </Button>
-              </ButtonGroup>
-            </ButtonToolbar>
+            <Col xs={12} className="text-xs-right">
+                <ButtonGroup>
+                  <Button bsSize="small" bsStyle="success" onClick={() => this.onVotePost(post.id,'upVote')}><Glyphicon  glyph="glyphicon glyphicon-thumbs-up" /></Button>
+                  <Button bsSize="small" bsStyle="primary" onClick={() => this.onVotePost(post.id,'downVote')}><Glyphicon glyph="glyphicon glyphicon-thumbs-down" /></Button>
+                  <Button bsSize="small" bsStyle="danger" onClick={() =>this.onDeleteClick(post.id)}>
+                    <Glyphicon glyph="glyphicon glyphicon-remove" />
+                  </Button>
+                </ButtonGroup>
+            </Col>
           </Row>
         </li>
         );
@@ -80,25 +86,34 @@ class PostsIndex extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <Button className="pull-right" bsSize="small" bsStyle="primary" onClick={this.props.openModal}><Glyphicon glyph="glyphicon glyphicon-plus" /></Button>
-        </div>
-        <div className="row">
-          <CategoriesIndex />
-          <ul className='list-group col-sm-9'>
-            {this.renderPosts()}
-          </ul>
-        </div>
-        <ReactModal
-          isOpen={this.props.modals.modalOpen}
-          onRequestClose={this.props.closeModal}
-          contentLabel='Modal'
-        >
-        <button type="button" className="close" onClick={this.props.closeModal}>&times;</button>
-          <PostsNewForm />
-        </ReactModal>
+      <div>
+        <div className="container">
+          <Row>
+            <Col xs={12} className="text-xs-right">
+              <Button
+                bsSize="small"
+                bsStyle="primary"
+                onClick={this.props.openModal}>
+                  <Glyphicon glyph="glyphicon glyphicon-plus" />
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <CategoriesIndex />
+            <ul className='list-group col-sm-9'>
+              {this.renderPosts()}
+            </ul>
+          </Row>
+          <ReactModal
+            isOpen={this.props.modals.modalOpen}
+            onRequestClose={this.props.closeModal}
+            contentLabel='Modal'
+          >
+          <button type="button" className="close" onClick={this.props.closeModal}>&times;</button>
+            <PostsNewForm />
+          </ReactModal>
 
+        </div>
       </div>
     )
   }
