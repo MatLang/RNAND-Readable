@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
-import { getPost, votePost } from '../actions';
-import { Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label, Well } from 'react-bootstrap';
+import { getPost, votePost, fetchPostComments } from '../actions';
+import {
+  Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label,
+  Well, Media
+ } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { timestampToDate } from '../utils/helpers'
+import CommentsShow from './comments_show'
 
 class PostsShow extends Component {
 
   componentDidMount() {
       const { id } = this.props.match.params;
       this.props.getPost(id);
+      this.props.fetchPostComments(id);
   }
 
   onVotePost(id, option) {
@@ -18,6 +24,7 @@ class PostsShow extends Component {
 
   render() {
     const { post } = this.props;
+    const { id } = this.props.match.params;
 
     return (!post)
       ? <div>Loading</div>
@@ -45,7 +52,10 @@ class PostsShow extends Component {
                 <Row><Label>{post.category}</Label></Row>
                 <Row className="post-body">{post.body}</Row>
                 <Row >
-                  <Col xs={12} className="text-xs-right">
+                  <Col xs={10} className="text-muted">
+                    {_.size(this.props.comments)} Comments
+                  </Col>
+                  <Col xs={2} className="text-xs-right">
                     <h7>
                       <Label
                         className="text-xs-right"
@@ -70,12 +80,18 @@ class PostsShow extends Component {
               </li>
             </Col>
           </Row>
+
+          <CommentsShow id={id}/>
+
         </div>
   }
 }
 
 function mapStateToProps(state, ownProps) {
-    return { post: state.posts[ownProps.match.params.id]}
+    return {
+      post: state.posts[ownProps.match.params.id],
+      comments: state.comments
+    }
 }
 
-export default connect(mapStateToProps, { getPost, votePost })(PostsShow)
+export default connect(mapStateToProps, { getPost, votePost, fetchPostComments })(PostsShow)

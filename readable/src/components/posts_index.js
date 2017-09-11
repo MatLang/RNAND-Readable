@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts, fetchCategories, fetchCategoryPosts, openModal, closeModal, deletePost, votePost } from '../actions';
+import {
+  fetchPosts, fetchCategories, fetchCategoryPosts, openModal, closeModal,
+  deletePost, votePost, fetchPostComments
+} from '../actions';
 import { Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label, Well } from 'react-bootstrap';
 import { timestampToDate } from '../utils/helpers'
 import ReactModal from 'react-modal';
 import PostsNewForm from './posts_new'
 import { Link } from 'react-router-dom';
 import CategoriesIndex from './categories_index';
+import PostsSort from './posts_sort';
 
 class PostsIndex extends Component {
   componentDidMount() {
@@ -30,13 +34,13 @@ class PostsIndex extends Component {
 
     renderPosts() {
 
-    const { posts } = this.props;
+    const { posts, postsSortOrder } = this.props;
 
     if (posts.length === 0) {
       return <div> No posts found for this category!</div>
     }
 
-    const sortedPosts = _.sortBy(posts, 'voteScore').reverse()
+    const sortedPosts = _.sortBy(posts, postsSortOrder).reverse()
 
 
     return _.map(sortedPosts, post => {
@@ -98,6 +102,7 @@ class PostsIndex extends Component {
               </Button>
             </Col>
           </Row>
+          <PostsSort />
           <Row>
             <CategoriesIndex />
             <ul className='list-group col-sm-9'>
@@ -120,7 +125,16 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: _.filter(state.posts, post => !post.deleted), categories: state.categories, modals:state.modals}
+  return {
+    posts: _.filter(state.posts, post => !post.deleted),
+    categories: state.categories,
+    postsSortOrder: state.postsOrder,
+    modals:state.modals
+  }
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchCategoryPosts, fetchCategories, closeModal, openModal, deletePost, votePost })(PostsIndex)
+export default connect(mapStateToProps,
+  {
+    fetchPosts, fetchCategoryPosts, fetchCategories, closeModal,
+    openModal, deletePost, votePost, fetchPostComments
+  })(PostsIndex)

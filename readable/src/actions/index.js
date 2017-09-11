@@ -1,7 +1,7 @@
 import axios from 'axios';
 import uuidv4 from 'uuid/v4';
 
-const API = 'http://localhost:5001'
+const API = 'http://localhost:3001'
 
 let token = localStorage.token
 
@@ -21,6 +21,16 @@ export const CREATE_POST = 'CREATE_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const VOTE_POST = 'VOTE_POST'
+export const SORT_POSTS = 'SORT_POSTS'
+
+export function sortPosts(method) {
+  return dispatch => {
+    dispatch({
+      type: SORT_POSTS,
+      payload: method
+    })
+  }
+}
 
 export function fetchPosts() {
   const request = axios.get(`${API}/posts`)
@@ -100,7 +110,7 @@ export function deletePost(id) {
 }
 
 export function votePost(id, option) {
-  const request = axios.post(`${API}/posts/${id}`, {option})
+  const request = axios.post(`${API}/posts/${id}`, {option:option})
 
   return dispatch => {
     request.then(({ data }) => {
@@ -139,6 +149,19 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
 
+export function deleteComment(id){
+  const request = axios.delete(`${API}/comments/${id}`)
+
+  return dispatch => {
+    request.then(( { data }) => {
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: data
+      })
+    })
+  }
+}
+
 export function fetchPostComments(id){
   const request = axios.get(`${API}/posts/${id}/comments`)
 
@@ -146,7 +169,20 @@ export function fetchPostComments(id){
     request.then(({ data }) => {
       dispatch({
         type: FETCH_POST_COMMENTS,
-        comments: data
+        payload: data
+      })
+    })
+  }
+}
+
+export function voteComment(id, option){
+  const request = axios.post(`${API}/comments/${id}`, {option})
+
+  return dispatch => {
+    request.then(({ data } ) => {
+      dispatch({
+        type: VOTE_COMMENT,
+        payload: data
       })
     })
   }
