@@ -37,12 +37,27 @@ export function fetchPosts() {
 
   return dispatch => {
     request.then(({ data }) => {
+      console.log(data);
+
+      // dispatch POSTS
       dispatch({
         type: FETCH_POSTS,
         posts: data
       })
-    })
-  };
+
+      // dispatch COMMENTS
+      for (post in data) {
+        axios.get(`${API}/posts/${post.id}/comments`).then(({ comments }) => {
+          dispatch({
+           type: FETCH_POST_COMMENTS,
+           payload: comments,
+           postId: post.id,
+         })
+      })
+
+    }
+  });
+}
 }
 
 export function fetchCategoryPosts(category){
@@ -169,6 +184,7 @@ export function fetchPostComments(id){
     request.then(({ data }) => {
       dispatch({
         type: FETCH_POST_COMMENTS,
+        id,
         payload: data
       })
     })

@@ -1,0 +1,34 @@
+export function fetchPosts() {
+  const request = axios.get(`${API}/posts`)
+
+  return dispatch => {
+    request.then(({ data }) => {
+
+      // dispatch POSTS
+      dispatch({
+        type: FETCH_POSTS,
+        posts: data
+      })
+
+      // dispatch COMMENTS
+      for (post of data) {
+        axios.get(`${API}/posts/${id}/comments`).then(({ comments }) => {
+        dispatch({
+          type: FETCH_POST_COMMENTS,
+          payload: comments
+        })
+      }
+
+    })
+  };
+}
+
+ (this.props.comments[this.props.post.id] || []).length
+
+ dispatch({
+  type: FETCH_POST_COMMENTS,
+  payload: comments,
+  postId: post.id,
+})
+
+return { ...state, [action.postId]: action.comments }

@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import { FETCH_POSTS, DELETE_POST, CREATE_POST, VOTE_POST, GET_POST, FETCH_CATEGORY_POSTS, EDIT_POST } from '../actions';
+import {
+  FETCH_POSTS, DELETE_POST, CREATE_POST, VOTE_POST, GET_POST,
+  FETCH_CATEGORY_POSTS, EDIT_POST, FETCH_POST_COMMENTS } from '../actions';
 
 const initialPostsState = {}
 
@@ -28,6 +30,9 @@ export default function(state=initialPostsState, action) {
         ...state,
         [action.payload.id]: action.payload
     }
+    case FETCH_POST_COMMENTS:
+    console.log(state.action.id)
+      return state
     default:
       return state;
   }

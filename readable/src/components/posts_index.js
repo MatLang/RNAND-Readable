@@ -20,7 +20,7 @@ class PostsIndex extends Component {
         match: { params : { category } } } = this.props;
       fetchCategoryPosts(category);
     } else {
-      this.props.fetchPosts();
+      this.props.fetchPosts()
     }
   }
 
