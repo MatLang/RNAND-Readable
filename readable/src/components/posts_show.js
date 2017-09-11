@@ -12,6 +12,7 @@ import CommentsShow from './comments_show'
 
 class PostsShow extends Component {
 
+
   componentDidMount() {
       const { id } = this.props.match.params;
       this.props.getPost(id);
