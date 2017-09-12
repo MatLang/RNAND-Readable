@@ -30,8 +30,6 @@ export default function(state=initialPostsState, action) {
         ...state,
         [action.payload.id]: action.payload
     }
-    case FETCH_POST_COMMENTS:
-    console.log(state.action.id)
       return state
     default:
       return state;

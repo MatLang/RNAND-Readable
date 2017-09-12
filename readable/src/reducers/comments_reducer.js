@@ -4,6 +4,7 @@ import { FETCH_POST_COMMENTS, VOTE_COMMENT, DELETE_COMMENT, COUNT_POST_COMMENTS 
 export default function(state={}, action) {
   switch(action.type){
     case FETCH_POST_COMMENTS:
+    console.log(action.payload)
       return { ...state, [action.postId]: action.payload }
     case VOTE_COMMENT:
       return {

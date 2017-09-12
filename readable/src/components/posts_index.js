@@ -61,6 +61,9 @@ class PostsIndex extends Component {
           <Row><Label>{post.category}</Label></Row>
           <Row className="post-body">{post.body}</Row>
           <Row >
+            <Col xs={10} className="text-muted">
+              {(this.props.comments[post.id] || []).length} Comments
+            </Col>
             <Col xs={12} className="text-xs-right">
               <h7>
                 <Label
@@ -127,6 +130,7 @@ class PostsIndex extends Component {
 function mapStateToProps(state) {
   return {
     posts: _.filter(state.posts, post => !post.deleted),
+    comments: state.comments,
     categories: state.categories,
     postsSortOrder: state.postsOrder,
     modals:state.modals

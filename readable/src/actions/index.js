@@ -37,8 +37,6 @@ export function fetchPosts() {
 
   return dispatch => {
     request.then(({ data }) => {
-      console.log(data);
-
       // dispatch POSTS
       dispatch({
         type: FETCH_POSTS,
@@ -46,11 +44,12 @@ export function fetchPosts() {
       })
 
       // dispatch COMMENTS
-      for (post in data) {
-        axios.get(`${API}/posts/${post.id}/comments`).then(({ comments }) => {
+      for (let post of data) {
+        console.log(post.id)
+        axios.get(`${API}/posts/${post.id}/comments`).then(({ data }) => {
           dispatch({
            type: FETCH_POST_COMMENTS,
-           payload: comments,
+           payload: data,
            postId: post.id,
          })
       })
