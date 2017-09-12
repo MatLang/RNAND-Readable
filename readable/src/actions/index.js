@@ -158,9 +158,31 @@ export function editPost(id,values, callback) {
 // Comments
 
 export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'
-export const ADD_COMMENT = 'ADD_COMMENT'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
+
+export function createComment(values, parentId){
+  const data = {
+    id: uuidv4(),
+    timestamp: Date.now(),
+    body: values.content,
+    author: values.author,
+    parentId: parentId
+  }
+
+  const request = axios.post(`${API}/comments`, data)
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: CREATE_COMMENT,
+        payload: data
+      })
+    })
+  }
+}
+
 
 export function deleteComment(id){
   const request = axios.delete(`${API}/comments/${id}`)
@@ -225,14 +247,16 @@ export function fetchCategories() {
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 
-export function openModal() {
+export function openModal(modal) {
   return {
     type: OPEN_MODAL,
+    payload: modal
   }
 }
 
-export function closeModal() {
+export function closeModal(modal) {
   return {
     type: CLOSE_MODAL,
+    payload: modal
   }
 }

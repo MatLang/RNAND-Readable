@@ -30,7 +30,6 @@ export default function(state=initialPostsState, action) {
         ...state,
         [action.payload.id]: action.payload
     }
-      return state
     default:
       return state;
   }

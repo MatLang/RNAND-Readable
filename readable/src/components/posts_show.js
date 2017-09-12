@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { getPost, votePost, fetchPostComments } from '../actions';
+import { getPost, votePost, fetchPostComments, openModal, closeModal } from '../actions';
 import {
   Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label,
   Well, Media
  } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { timestampToDate } from '../utils/helpers'
-import CommentsShow from './comments_show'
+import { timestampToDate } from '../utils/helpers';
+import CommentsShow from './comments_show';
+import NewPost from './comment_new';
+import ReactModal from 'react-modal';
 
 class PostsShow extends Component {
 
@@ -33,6 +35,14 @@ class PostsShow extends Component {
           <Row>
             <Col>
               <Link to="/"><Button bsStyle="primary" >Home</Button></Link>
+            </Col>
+            <Col className="text-xs-right">
+              <Button
+                bsSize="small"
+                bsStyle="primary"
+                onClick={() => this.props.openModal('newComment')}>
+                  <Glyphicon glyph="glyphicon glyphicon-plus" />
+              </Button>
             </Col>
           </Row>
           <Row>
@@ -80,8 +90,15 @@ class PostsShow extends Component {
               </li>
             </Col>
           </Row>
+          <ReactModal
+            isOpen={this.props.modals.newComment}
+            onRequestClose={() => this.props.closeModal('newComment')}
+            contentLabel='Modal'
+          >
+            <NewPost parentId={post.id}/>
+          </ReactModal>
 
-          <CommentsShow id={id}/>
+            <CommentsShow id={id}/>
 
         </div>
   }
@@ -90,8 +107,9 @@ class PostsShow extends Component {
 function mapStateToProps(state, ownProps) {
     return {
       post: state.posts[ownProps.match.params.id],
-      comments: state.comments
+      comments: state.comments,
+      modals: state.modals
     }
 }
 
-export default connect(mapStateToProps, { getPost, votePost, fetchPostComments })(PostsShow)
+export default connect(mapStateToProps, { getPost, votePost, fetchPostComments, openModal, closeModal })(PostsShow)

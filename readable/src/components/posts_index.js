@@ -46,7 +46,6 @@ class PostsIndex extends Component {
 
 
     return _.map(sortedPosts, post => {
-      console.log(this.props.comments)
       return (
         <li className="list-group-item" key={post.id}>
           <Row className="text text-primary ">
@@ -102,7 +101,7 @@ class PostsIndex extends Component {
               <Button
                 bsSize="small"
                 bsStyle="primary"
-                onClick={this.props.openModal}>
+                onClick={() => this.props.openModal('newPost')}>
                   <Glyphicon glyph="glyphicon glyphicon-plus" />
               </Button>
             </Col>
@@ -115,11 +114,11 @@ class PostsIndex extends Component {
             </ul>
           </Row>
           <ReactModal
-            isOpen={this.props.modals.modalOpen}
-            onRequestClose={this.props.closeModal}
+            isOpen={this.props.modals.newPost}
+            onRequestClose={() => this.props.closeModal('newPost')}
             contentLabel='Modal'
           >
-          <button type="button" className="close" onClick={this.props.closeModal}>&times;</button>
+          <button type="button" className="close" onClick={() =>this.props.closeModal('newPost')}>&times;</button>
             <PostsNewForm />
           </ReactModal>
 

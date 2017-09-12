@@ -3,7 +3,8 @@ import _ from 'lodash';
 import { OPEN_MODAL, CLOSE_MODAL } from '../actions';
 
 const initialState = {
-  modalOpen: false
+  newPost: false,
+  newComment: false
 }
 
 export default function (state = initialState, action) {
@@ -11,12 +12,12 @@ export default function (state = initialState, action) {
     case OPEN_MODAL:
       return {
         ...state,
-        modalOpen:true
+        [action.payload]:true
       }
     case CLOSE_MODAL:
       return {
         ...state,
-        modalOpen: false
+        [action.payload]: false
       }
     default:
       return state;
