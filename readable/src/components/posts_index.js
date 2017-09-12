@@ -134,7 +134,7 @@ function mapStateToProps(state) {
     comments: state.comments,
     categories: state.categories,
     postsSortOrder: state.postsOrder,
-    modals:state.modals
+    modals: state.modals
   }
 }
 

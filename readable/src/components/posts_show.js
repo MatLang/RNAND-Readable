@@ -47,7 +47,7 @@ class PostsShow extends Component {
           </Row>
           <Row>
             <Col>
-              <li className="list-group-item" key={post.id}>
+              <div className="list-group-item" key={post.id}>
                 <Row className="text text-primary ">
                   <Link to={`/posts/${post.id}`}>
                     {post.title}
@@ -87,7 +87,7 @@ class PostsShow extends Component {
                       </ButtonGroup>
                   </Col>
                 </Row>
-              </li>
+              </div>
             </Col>
           </Row>
           <ReactModal
