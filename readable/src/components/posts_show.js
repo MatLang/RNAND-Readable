@@ -12,7 +12,6 @@ import CommentsShow from './comments_show'
 
 class PostsShow extends Component {
 
-
   componentDidMount() {
       const { id } = this.props.match.params;
       this.props.getPost(id);
@@ -54,7 +53,7 @@ class PostsShow extends Component {
                 <Row className="post-body">{post.body}</Row>
                 <Row >
                   <Col xs={10} className="text-muted">
-                    {_.size(this.props.comments)} Comments
+                    {(_.size(this.props.comments[post.id]))} Comments
                   </Col>
                   <Col xs={2} className="text-xs-right">
                     <h7>

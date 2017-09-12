@@ -45,7 +45,6 @@ export function fetchPosts() {
 
       // dispatch COMMENTS
       for (let post of data) {
-        console.log(post.id)
         axios.get(`${API}/posts/${post.id}/comments`).then(({ data }) => {
           dispatch({
            type: FETCH_POST_COMMENTS,
@@ -183,15 +182,15 @@ export function fetchPostComments(id){
     request.then(({ data }) => {
       dispatch({
         type: FETCH_POST_COMMENTS,
-        id,
+        postId: id,
         payload: data
       })
     })
   }
 }
 
-export function voteComment(id, option){
-  const request = axios.post(`${API}/comments/${id}`, {option})
+export function voteComment(commentId, option){
+  const request = axios.post(`${API}/comments/${commentId}`, {option})
 
   return dispatch => {
     request.then(({ data } ) => {

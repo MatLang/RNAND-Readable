@@ -28,15 +28,17 @@ class CommentsShow extends Component {
   }
 
   renderCommentList(){
-    const { comments } = this.props;
+    const { comments, id } = this.props;
+
+    const commentsById = _.filter(comments[id], comment => !comment.deleted)
 
     if (!comments){
       return <div> No comments found </div>
     }
 
-    return _.map(comments, (post,id) => {
+    return _.map(commentsById, (post,index) => {
       return (
-        <Col key={id} sm={11} smOffset={1}>
+        <Col key={index} sm={11} smOffset={1}>
             <Media>
               <Media.Body>
                 <Media.Heading>
@@ -96,7 +98,7 @@ class CommentsShow extends Component {
 }
 
 function mapStateToProps (state) {
-    const comments = _.filter(state.comments, comment => !comment.deleted);
+    const comments = state.comments
     return { comments }
 }
 

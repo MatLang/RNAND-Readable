@@ -34,6 +34,8 @@ class PostsIndex extends Component {
 
     renderPosts() {
 
+
+
     const { posts, postsSortOrder } = this.props;
 
     if (posts.length === 0) {
@@ -44,7 +46,7 @@ class PostsIndex extends Component {
 
 
     return _.map(sortedPosts, post => {
-
+      console.log(this.props.comments)
       return (
         <li className="list-group-item" key={post.id}>
           <Row className="text text-primary ">
@@ -62,7 +64,7 @@ class PostsIndex extends Component {
           <Row className="post-body">{post.body}</Row>
           <Row >
             <Col xs={10} className="text-muted">
-              {(this.props.comments[post.id] || []).length} Comments
+              {(_.size(this.props.comments[post.id]))} Comments
             </Col>
             <Col xs={12} className="text-xs-right">
               <h7>
