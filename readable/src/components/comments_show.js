@@ -11,6 +11,7 @@ import {
     Col, Row, ButtonGroup,
 } from 'react-bootstrap';
 import { timestampToDate } from '../utils/helpers'
+import { Link } from 'react-router-dom';
 
 class CommentsShow extends Component {
 
@@ -43,8 +44,18 @@ class CommentsShow extends Component {
               <Media.Body>
                 <Media.Heading>
                   {timestampToDate(post.timestamp)} by {post.author}
+
                 </Media.Heading>
-                <p>{post.body}</p>
+                <p>
+                  {post.body}
+                  <span>
+                    <Link style={{"marginLeft":"5px"}}
+                    to={`/comments/edit/${post.id}`}>
+                      <Glyphicon glyph="glyphicon glyphicon-edit"/>
+                    </Link>
+                  </span>
+                </p>
+
                 <Col xs={12} className="text-xs-right">
                   <h7>
                     <Label

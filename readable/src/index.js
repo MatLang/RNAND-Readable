@@ -14,6 +14,7 @@ import PostsIndex from './components/posts_index';
 import PostsShow from './components/posts_show';
 import CommentsShow from './components/comments_show';
 import PostsEdit from './components/posts_edit';
+import CommentEdit from './components/comment_edit';
 import { Grid } from 'react-bootstrap';
 
 const store = createStore(
@@ -33,6 +34,7 @@ ReactDOM.render(
             <Route path="/posts/:id/comments" component={CommentsShow} />
             <Route path="/posts/:id" component={PostsShow} />
             <Route path="/edit/:id" component={PostsEdit} />
+            <Route path="/comments/edit/:id" component={CommentEdit} />
             <Route path="/:category" component={PostsIndex} />
             <Route exact path="/" component={PostsIndex} />
           </Switch>

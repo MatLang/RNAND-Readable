@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import { FETCH_POST_COMMENTS, VOTE_COMMENT, DELETE_COMMENT, COUNT_POST_COMMENTS, CREATE_COMMENT } from '../actions';
+import { FETCH_POST_COMMENTS, VOTE_COMMENT, DELETE_COMMENT, COUNT_POST_COMMENTS,
+   CREATE_COMMENT, GET_COMMENT, EDIT_COMMENT
+ } from '../actions';
 
 export default function(state={}, action) {
   switch(action.type){
@@ -22,6 +24,18 @@ export default function(state={}, action) {
         ...state,
         [action.payload.parentId]: {...state[action.payload.parentId],
         [action.payload.id]: {...action.payload, deleted:true}}
+      }
+    case GET_COMMENT:
+      return {
+        ...state,
+        [action.payload.parentId]: {...state[action.payload.parentId],
+        [action.payload.id]: {...action.payload}}
+      }
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        [action.payload.parentId]: {...state[action.payload.parentId],
+        [action.payload.id]: {...action.payload}}
       }
     default:
       return state

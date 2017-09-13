@@ -161,6 +161,42 @@ export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
+export const GET_COMMENT = 'GET_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+
+export function editComment(id,values, callback) {
+  const { body } = values;
+
+  const data = {
+    body,
+    date: Date.now()
+  }
+
+  const request = axios.put(`${API}/comments/${id}`, data)
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: EDIT_COMMENT,
+        payload: data
+      })
+    }).then(() => callback())
+  }
+}
+
+
+export function getComment(commentId) {
+  const request = axios.get(`${API}/comments/${commentId}`)
+
+  return dispatch => {
+    request.then(({ data }) => {
+      dispatch({
+        type: GET_COMMENT,
+        payload: data
+      })
+    })
+  }
+}
 
 export function createComment(values, parentId){
   const data = {
