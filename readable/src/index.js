@@ -32,7 +32,7 @@ ReactDOM.render(
         <Grid>
           <Switch>
             <Route path="/posts/:id/comments" component={CommentsShow} />
-            <Route path="/posts/:id" component={PostsShow} />
+            <Route path="/:category/:id" component={PostsShow} />
             <Route path="/edit/:id" component={PostsEdit} />
             <Route path="/comments/edit/:id" component={CommentEdit} />
             <Route path="/:category" component={PostsIndex} />

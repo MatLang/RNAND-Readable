@@ -49,7 +49,7 @@ class PostsIndex extends Component {
       return (
         <li className="list-group-item" key={post.id}>
           <Row className="text text-primary ">
-            <Link to={`/posts/${post.id}`}>
+            <Link to={`/${post.category}/${post.id}`}>
               {post.title}
             </Link>
             <Link to={`/edit/${post.id}`}><Glyphicon glyph="glyphicon glyphicon-edit"/></Link>
