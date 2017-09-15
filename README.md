@@ -9,7 +9,7 @@ npm install
 npm start
 
 
-clone [API server] (https://github.com/udacity/reactnd-project-readable-starter)
+clone [API server](https://github.com/udacity/reactnd-project-readable-starter)
 extract reactnd-project-readable-starter-master into project folder and rename to server
 cd server
 npm install
