@@ -18,7 +18,8 @@ import {
   FETCH_CATEGORIES,
   FETCH_CATEGORY,
   OPEN_MODAL,
-  CLOSE_MODAL
+  CLOSE_MODAL,
+  LOADING_POSTS
  } from './types'
 
 const API = 'http://localhost:3001'
@@ -47,11 +48,20 @@ export function fetchPosts() {
   const request = axios.get(`${API}/posts`)
 
   return dispatch => {
+      dispatch({
+        type: LOADING_POSTS,
+        payload: true
+      })
     request.then(({ data }) => {
       // dispatch POSTS
       dispatch({
         type: FETCH_POSTS,
         posts: data
+      })
+
+      dispatch({
+        type: LOADING_POSTS,
+        payload: false
       })
 
       // dispatch COMMENTS
@@ -86,10 +96,18 @@ export function getPost(id) {
   const request = axios.get(`${API}/posts/${id}`)
 
   return dispatch => {
+    dispatch({
+      type: LOADING_POSTS,
+      payload: true
+    })
     request.then(({data}) => {
       dispatch({
         type: GET_POST,
         data
+      })
+      dispatch({
+        type: LOADING_POSTS,
+        payload: false
       })
     })
   }

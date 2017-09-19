@@ -31,13 +31,13 @@ class PostsShow extends Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, loadingPosts } = this.props;
     const { id } = this.props.match.params;
+    console.log(loadingPosts)
 
-    return (!post)
-      ? <div>Post not found</div>
-      :
-        <div>
+    return (loadingPosts) ? <div> Loading </div>
+    : (!post) ? <div>Post not found</div>
+      : <div>
           <Row>
             <Col>
               <Link to="/"><Button bsStyle="primary" >Home</Button></Link>
@@ -110,11 +110,12 @@ class PostsShow extends Component {
   }
 }
 
-function mapStateToProps({ posts, comments, modals }, ownProps) {
+function mapStateToProps({ posts, comments, modals, loadingPosts }, ownProps) {
     return {
       post: posts[ownProps.match.params.id],
       comments,
-      modals
+      modals,
+      loadingPosts: loadingPosts.loadingPosts
     }
 }
 

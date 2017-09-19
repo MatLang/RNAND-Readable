@@ -4,6 +4,7 @@ import CategoriesReducer from './categories_reducer';
 import ModalsReducer from './modals_reducer';
 import CommentsReducer from './comments_reducer';
 import PostsSortReducer from './sort_reducer';
+import LoadingReducer from './loading';
 import { reducer as reduxFormReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   categories: CategoriesReducer,
   comments: CommentsReducer,
   modals: ModalsReducer,
-  form: reduxFormReducer
+  form: reduxFormReducer,
+  loadingPosts: LoadingReducer
 });
 
 export default rootReducer;
