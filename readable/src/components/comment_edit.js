@@ -8,17 +8,15 @@ import {
     Button,
     ControlLabel
 } from 'react-bootstrap';
-import { getComment, editComment } from '../actions';
+import * as actions from '../actions';
 import _ from 'lodash';
 
 class CommentEdit extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    //this.props.getComment(id);
     this.handleInitialize();
   }
-
 
   handleInitialize() {
     const { id } = this.props.match.params;
@@ -80,5 +78,5 @@ function mapStateToProps(state, ownProps) {
 export default reduxForm({
   form: 'CommentEditForm'
 })(
-  connect(mapStateToProps, { getComment, editComment })(CommentEdit)
+  connect(mapStateToProps, actions)(CommentEdit)
 )

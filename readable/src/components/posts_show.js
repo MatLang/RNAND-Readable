@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { getPost, votePost, fetchPostComments, openModal, closeModal } from '../actions';
+import * as actions from '../actions';
 import {
   Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label,
   Well, Media
@@ -13,6 +13,10 @@ import NewPost from './comment_new';
 import ReactModal from 'react-modal';
 
 class PostsShow extends Component {
+
+  componentWillMount() {
+    return <div> Test </div>
+  }
 
   componentDidMount() {
       const { id } = this.props.match.params;
@@ -104,12 +108,12 @@ class PostsShow extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps({ posts, comments, modals }, ownProps) {
     return {
-      post: state.posts[ownProps.match.params.id],
-      comments: state.comments,
-      modals: state.modals
+      post: posts[ownProps.match.params.id],
+      comments,
+      modals
     }
 }
 
-export default connect(mapStateToProps, { getPost, votePost, fetchPostComments, openModal, closeModal })(PostsShow)
+export default connect(mapStateToProps, actions)(PostsShow)

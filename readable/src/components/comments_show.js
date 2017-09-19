@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPostComments, voteComment, deleteComment } from '../actions';
+import * as actions from '../actions';
 import {
     Button,
     ListGroup,
@@ -82,24 +82,6 @@ class CommentsShow extends Component {
     });
   }
 
-  /*<Media>
-    <Media.Body>
-      <Media.Heading>{comment.title}</Media.Heading>
-      <p>{comment.body}.</p>
-    </Media.Body>
-    <Row>
-      <Col xs={12} className="text-xs-right">
-          <ButtonGroup>
-            <Button bsSize="small" bsStyle="success" onClick={() => this.onVotePost(comment.id,'upVote')}><Glyphicon  glyph="glyphicon glyphicon-thumbs-up" /></Button>
-            <Button bsSize="small" bsStyle="primary" onClick={() => this.onVotePost(comment.id,'downVote')}><Glyphicon glyph="glyphicon glyphicon-thumbs-down" /></Button>
-            <Button bsSize="small" bsStyle="danger" onClick={() =>this.onDeleteClick(comment.id)}>
-              <Glyphicon glyph="glyphicon glyphicon-remove" />
-            </Button>
-          </ButtonGroup>
-      </Col>
-    </Row>
-  </Media>*/
-
   render(){
     const { comment } = this.props;
     return(
@@ -108,9 +90,8 @@ class CommentsShow extends Component {
   }
 }
 
-function mapStateToProps (state) {
-    const comments = state.comments
+function mapStateToProps ({ comments }) {
     return { comments }
 }
 
-export default connect(mapStateToProps, { fetchPostComments, voteComment, deleteComment })(CommentsShow)
+export default connect(mapStateToProps, actions)(CommentsShow)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCategories, fetchCategoryPosts, fetchPosts } from '../actions';
+import * as actions from '../actions';
 import { Link } from 'react-router-dom';
 
 class CategoriesIndex extends Component {
@@ -41,8 +41,8 @@ class CategoriesIndex extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {categories: state.categories}
+function mapStateToProps({ categories }) {
+  return { categories }
 }
 
-export default connect(mapStateToProps, { fetchCategories, fetchCategoryPosts, fetchPosts })(CategoriesIndex)
+export default connect(mapStateToProps, actions)(CategoriesIndex)

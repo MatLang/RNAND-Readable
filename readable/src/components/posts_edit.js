@@ -8,7 +8,7 @@ import {
     Button,
     ControlLabel
 } from 'react-bootstrap';
-import { getPost, editPost } from '../actions';
+import * as actions from '../actions';
 
 class PostsEdit extends Component {
   componentDidMount(){
@@ -74,13 +74,13 @@ render () {
 }
 }
 
-function mapStateToProps(state, ownProps) {
-    return { post: state.posts[ownProps.match.params.id]}
+function mapStateToProps({ posts }, ownProps) {
+    return { post: posts[ownProps.match.params.id]}
 }
 
 export default reduxForm({
     //validate,
     form: 'EditPostForm'
 })(
-    connect(mapStateToProps, { getPost, editPost })(PostsEdit)
+    connect(mapStateToProps, actions)(PostsEdit)
 );

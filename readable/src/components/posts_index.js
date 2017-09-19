@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchPosts, fetchCategories, fetchCategoryPosts, openModal, closeModal,
-  deletePost, votePost, fetchPostComments
-} from '../actions';
+import * as actions from '../actions';
 import { Row, Col, ButtonToolbar, ButtonGroup, Button, Glyphicon, Panel, Badge, Label, Well } from 'react-bootstrap';
 import { timestampToDate } from '../utils/helpers'
 import ReactModal from 'react-modal';
@@ -128,18 +125,14 @@ class PostsIndex extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ posts, comments, categories, postsOrder, modals }) {
   return {
-    posts: _.filter(state.posts, post => !post.deleted),
-    comments: state.comments,
-    categories: state.categories,
-    postsSortOrder: state.postsOrder,
-    modals: state.modals
+    posts: _.filter(posts, post => !post.deleted),
+    comments,
+    categories,
+    postsSortOrder: postsOrder,
+    modals
   }
 }
 
-export default connect(mapStateToProps,
-  {
-    fetchPosts, fetchCategoryPosts, fetchCategories, closeModal,
-    openModal, deletePost, votePost, fetchPostComments
-  })(PostsIndex)
+export default connect(mapStateToProps, actions)(PostsIndex)

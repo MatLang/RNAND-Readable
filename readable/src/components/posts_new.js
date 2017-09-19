@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { fetchCategories, createPost, closeModal, fetchPosts } from '../actions';
+import * as actions from '../actions';
 import {
     FormGroup,
     FormControl,
@@ -103,13 +103,13 @@ class PostsNew extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {categories: state.categories}
+function mapStateToProps({ categories }) {
+  return { categories }
 }
 
 export default reduxForm({
   form: 'PostsNewForm',  // a unique identifier for this form
   validate,                // <--- validation function given to redux-form
 })(
-  connect(mapStateToProps, { fetchPosts, fetchCategories, createPost, closeModal })(PostsNew)
+  connect(mapStateToProps, actions)(PostsNew)
 );

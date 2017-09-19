@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
-import { createComment, closeModal } from '../actions'
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 import {
     FormGroup,
@@ -47,5 +47,5 @@ class NewComment extends Component {
 export default reduxForm({
   form: 'CommentsNewForm',  // a unique identifier for this form
 })(
-  connect(null, { createComment, closeModal })(NewComment)
+  connect(null, actions)(NewComment)
 );
