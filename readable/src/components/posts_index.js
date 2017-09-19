@@ -23,6 +23,7 @@ class PostsIndex extends Component {
 
   onDeleteClick(id) {
     this.props.deletePost(id)
+    alert("Post deleted")
   }
 
   onVotePost(id, option) {
@@ -31,8 +32,6 @@ class PostsIndex extends Component {
 
     renderPosts() {
 
-
-
     const { posts, postsSortOrder } = this.props;
 
     if (posts.length === 0) {
@@ -40,7 +39,6 @@ class PostsIndex extends Component {
     }
 
     const sortedPosts = _.sortBy(posts, postsSortOrder).reverse()
-
 
     return _.map(sortedPosts, post => {
       return (
