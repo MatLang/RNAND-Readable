@@ -14,10 +14,6 @@ import ReactModal from 'react-modal';
 
 class PostsShow extends Component {
 
-  componentWillMount() {
-    return <div> Test </div>
-  }
-
   componentDidMount() {
       const { id } = this.props.match.params;
       this.props.getPost(id);
@@ -30,6 +26,7 @@ class PostsShow extends Component {
 
   onDeleteClick(id) {
     this.props.deletePost(id)
+    alert("Post deleted")
     this.props.history.goBack();
   }
 
@@ -38,7 +35,7 @@ class PostsShow extends Component {
     const { id } = this.props.match.params;
 
     return (!post)
-      ? <div>Loading</div>
+      ? <div>Post not found</div>
       :
         <div>
           <Row>
