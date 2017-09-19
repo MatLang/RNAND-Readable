@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { FETCH_POST_COMMENTS, VOTE_COMMENT, DELETE_COMMENT, COUNT_POST_COMMENTS,
    CREATE_COMMENT, GET_COMMENT, EDIT_COMMENT
- } from '../actions';
+ } from '../actions/types';
 
 export default function(state={}, action) {
   switch(action.type){

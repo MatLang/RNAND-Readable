@@ -1,5 +1,25 @@
 import axios from 'axios';
 import uuidv4 from 'uuid/v4';
+import {
+  FETCH_POSTS,
+  FETCH_CATEGORY_POSTS,
+  GET_POST,
+  CREATE_POST,
+  DELETE_POST,
+  EDIT_POST,
+  VOTE_POST,
+  SORT_POSTS,
+  FETCH_POST_COMMENTS,
+  CREATE_COMMENT,
+  DELETE_COMMENT,
+  VOTE_COMMENT,
+  GET_COMMENT,
+  EDIT_COMMENT,
+  FETCH_CATEGORIES,
+  FETCH_CATEGORY,
+  OPEN_MODAL,
+  CLOSE_MODAL
+ } from './types'
 
 const API = 'http://localhost:3001'
 
@@ -13,15 +33,6 @@ const AUTH_HEADERS = { 'Authorization': token, 'Accept': 'application/json', };
 axios.defaults.headers.common['Authorization'] = AUTH_HEADERS;
 
 // Posts
-
-export const FETCH_POSTS = 'FETCH_POST'
-export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POSTS'
-export const GET_POST = 'GET_POST'
-export const CREATE_POST = 'CREATE_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const EDIT_POST = 'EDIT_POST'
-export const VOTE_POST = 'VOTE_POST'
-export const SORT_POSTS = 'SORT_POSTS'
 
 export function sortPosts(method) {
   return dispatch => {
@@ -50,12 +61,11 @@ export function fetchPosts() {
            type: FETCH_POST_COMMENTS,
            payload: data,
            postId: post.id,
-         })
-      })
-
-    }
-  });
-}
+          })
+        })
+      }
+    });
+  }
 }
 
 export function fetchCategoryPosts(category){
@@ -157,13 +167,6 @@ export function editPost(id,values, callback) {
 
 // Comments
 
-export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'
-export const CREATE_COMMENT = 'CREATE_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
-export const VOTE_COMMENT = 'VOTE_COMMENT'
-export const GET_COMMENT = 'GET_COMMENT'
-export const EDIT_COMMENT = 'EDIT_COMMENT'
-
 export function editComment(id,values, callback) {
   const { body } = values;
 
@@ -262,9 +265,6 @@ export function voteComment(commentId, option){
 
 // Categories
 
-export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
-export const FETCH_CATEGORY = 'FETCH_CATEGORY'
-
 export function fetchCategories() {
   const request = axios.get(`${API}/categories`)
 
@@ -279,9 +279,6 @@ export function fetchCategories() {
 }
 
 // Modals
-
-export const OPEN_MODAL = 'OPEN_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export function openModal(modal) {
   return {

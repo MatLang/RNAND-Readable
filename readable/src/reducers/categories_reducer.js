@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_CATEGORIES } from '../actions';
+import { FETCH_CATEGORIES } from '../actions/types';
 
 const initialPostsState = {}
 

@@ -12,21 +12,10 @@ import {
 function validate(values) {
     const errors = {};
 
-    if (!values.title) {
-        errors.title = "Enter a title!"
-    }
-
-    if (!values.owner) {
-        errors.owner = "Enter a name!"
-    }
-
-    if (!values.content) {
-        errors.content = "Enter some content!"
-    }
-
-    if (!values.category) {
-        errors.category = "Select a category!"
-    }
+    !values.title ? errors.title = "Enter a title!" : ""
+    !values.author ? errors.author = "Enter a name!" : ""
+    !values.content ? errors.content = "Enter some content!" : ""
+    !values.category ? errors.category = "Select a category!" : ""
 
     return errors;
 }

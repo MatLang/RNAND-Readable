@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {
   FETCH_POSTS, DELETE_POST, CREATE_POST, VOTE_POST, GET_POST,
-  FETCH_CATEGORY_POSTS, EDIT_POST, FETCH_POST_COMMENTS } from '../actions';
+  FETCH_CATEGORY_POSTS, EDIT_POST, FETCH_POST_COMMENTS } from '../actions/types';
 
 const initialPostsState = {}
 

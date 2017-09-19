@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { OPEN_MODAL, CLOSE_MODAL } from '../actions';
+import { OPEN_MODAL, CLOSE_MODAL } from '../actions/types';
 
 const initialState = {
   newPost: false,

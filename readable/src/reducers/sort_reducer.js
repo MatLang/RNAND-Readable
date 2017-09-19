@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { SORT_POSTS } from '../actions';
+import { SORT_POSTS } from '../actions/types';
 
 const initialState = 'voteScore';
 

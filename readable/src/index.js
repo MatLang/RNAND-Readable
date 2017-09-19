@@ -15,6 +15,7 @@ import PostsShow from './components/posts_show';
 import CommentsShow from './components/comments_show';
 import PostsEdit from './components/posts_edit';
 import CommentEdit from './components/comment_edit';
+import NotFound from './components/not_found';
 import { Grid } from 'react-bootstrap';
 
 const store = createStore(
@@ -22,8 +23,6 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(thunk)
 );
-
-//console.log(store.getState())
 
 ReactDOM.render(
   <Provider store={store}>
@@ -37,6 +36,7 @@ ReactDOM.render(
             <Route path="/comments/edit/:id" component={CommentEdit} />
             <Route path="/:category" component={PostsIndex} />
             <Route exact path="/" component={PostsIndex} />
+            <Route component={NotFound} />
           </Switch>
         </Grid>
       </div>
