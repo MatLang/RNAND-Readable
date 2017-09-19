@@ -88,8 +88,9 @@ class PostsIndex extends Component {
   }
 
   render() {
-    return (
-      <div>
+    const { loadingPosts } = this.props
+    return (loadingPosts)? <div>Loading...</div>
+    : <div>
         <div className="container">
           <Row>
             <Col xs={12} className="text-xs-right">
@@ -119,17 +120,18 @@ class PostsIndex extends Component {
 
         </div>
       </div>
-    )
+
   }
 }
 
-function mapStateToProps({ posts, comments, categories, postsOrder, modals }) {
+function mapStateToProps({ posts, comments, categories, postsOrder, modals, loadingPosts }) {
   return {
     posts: _.filter(posts, post => !post.deleted),
     comments,
     categories,
     postsSortOrder: postsOrder,
-    modals
+    modals,
+    loadingPosts: loadingPosts.loadingPosts
   }
 }
 

@@ -35,7 +35,8 @@ class PostsShow extends Component {
     const { id } = this.props.match.params;
 
     return (loadingPosts) ? <div> Loading </div>
-    : (!post) ? <div>Post not found</div>
+    : (!post) ?
+      <div>Post not found</div>
       : <div>
           <Row>
             <Col>
