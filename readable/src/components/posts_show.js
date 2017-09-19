@@ -28,6 +28,11 @@ class PostsShow extends Component {
     this.props.votePost(id,option);
   }
 
+  onDeleteClick(id) {
+    this.props.deletePost(id)
+    this.props.history.goBack();
+  }
+
   render() {
     const { post } = this.props;
     const { id } = this.props.match.params;
