@@ -33,7 +33,6 @@ class PostsShow extends Component {
   render() {
     const { post, loadingPosts } = this.props;
     const { id } = this.props.match.params;
-    console.log(loadingPosts)
 
     return (loadingPosts) ? <div> Loading </div>
     : (!post) ? <div>Post not found</div>
@@ -69,7 +68,7 @@ class PostsShow extends Component {
                 <Row className="post-body">{post.body}</Row>
                 <Row >
                   <Col xs={10} className="text-muted">
-                    {(_.size(this.props.comments[post.id]))} Comments
+                    {(_.size(_.filter(this.props.comments[post.id], comment => !comment.deleted)))} Comments
                   </Col>
                   <Col xs={2} className="text-xs-right">
                     <h7>
@@ -103,9 +102,7 @@ class PostsShow extends Component {
           >
             <NewPost parentId={post.id}/>
           </ReactModal>
-
             <CommentsShow id={id}/>
-
         </div>
   }
 }
